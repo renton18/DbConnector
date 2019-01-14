@@ -1,29 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace DbConnector
 {
     enum DbType
     {
-        mysql,
-        sqlserver
+        MYSQL,
+        SQLSERVER
     }
     class DbConnector
     {
-        private DbType type = 0;
-        public DbConnector(DbType type)
-        {
-            this.type = type;
-        }
-        public DbBase GetDbInstance(string dbServer, string dbPort, string dbName, string dbUser, string dbPassword)
+        public DbBase connector;
+        public DbConnector(DbType type, string dbServer, string dbPort, string dbName, string dbUser, string dbPassword)
         {
             switch (type)
             {
-                case DbType.mysql:
-                    return new MYSQL(dbServer, dbPort, dbName, dbUser, dbPassword);
-                case DbType.sqlserver:
-                    return new SQLSERVER(dbServer, dbPort, dbName, dbUser, dbPassword);
+                case DbType.MYSQL:
+                    connector = new MYSQL(dbServer, dbPort, dbName, dbUser, dbPassword);
+                    break;
+                case DbType.SQLSERVER:
+                    connector = new SQLSERVER(dbServer, dbPort, dbName, dbUser, dbPassword);
+                    break;
             }
-            return null;
         }
+
     }
 }

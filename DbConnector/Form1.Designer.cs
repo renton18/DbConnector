@@ -99,7 +99,7 @@
             // 
             // sqlServerBt
             // 
-            this.sqlServerBt.Location = new System.Drawing.Point(463, 14);
+            this.sqlServerBt.Location = new System.Drawing.Point(261, 9);
             this.sqlServerBt.Name = "sqlServerBt";
             this.sqlServerBt.Size = new System.Drawing.Size(145, 47);
             this.sqlServerBt.TabIndex = 0;

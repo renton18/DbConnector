@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace DbConnector
@@ -25,20 +24,10 @@ namespace DbConnector
             SetSetting();
             try
             {
-                var dbConnector = new DbConnector(dbtype).GetDbInstance(dbServerName, dbPort, dbName, dbUser, dbPassword);
-                dbConnector.Open();
-
-                var sql = "";
-                switch (dbTypeCb.SelectedItem.ToString())
-                {
-                    case "mysql":
-                        sql = "select * from test";
-                        break;
-                    case "sqlserver":
-                        sql = "select * from Person.Person";
-                        break;
-                }
-                showDgv.DataSource = dbConnector.ExecuteQuery(sql);
+                var dbConnector = new DbConnector(DbType.MYSQL, dbServerName, dbPort, dbName, dbUser, dbPassword);
+                dbConnector.connector.Open();
+                var sql = "select * from test";
+                showDgv.DataSource = dbConnector.connector.ExecuteQuery(sql);
             }
             catch (Exception ex)
             {
@@ -53,10 +42,10 @@ namespace DbConnector
             switch (dbTypeCb.SelectedIndex)
             {
                 case 0:
-                    dbtype = DbType.mysql;
+                    dbtype = DbType.MYSQL;
                     break;
                 case 1:
-                    dbtype = DbType.sqlserver;
+                    dbtype = DbType.SQLSERVER;
                     break;
             }
             this.dbServerName = serverNameTb.Text.Trim();
